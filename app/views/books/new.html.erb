@@ -1,0 +1,15 @@
+<h1>あたらしいとうこう</h1>
+
+<%= form_with model: @book do |form| %>
+ <div><%= form.label :title %>  <%= form.text_field :title %></div>
+ <div><%= form.label :body %>  <%= form.text_area :body %></div>
+ <div><%= form.button "Create Book", type: :submit %></div>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+ <% end %>
+<% end %>　
+</head>

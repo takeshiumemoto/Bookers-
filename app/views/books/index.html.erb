@@ -1,0 +1,41 @@
+<head>
+  <link rel="stylesheet" href="assets/application.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@rails/ujs@6.4.0/dist/rails-ujs.js"></script>
+<h1>Books</h1>
+<table>
+  <thead>
+    <tr>
+      <th class = "header-title">Title</th>
+      <th class = "header-body">Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.body %></td>
+        
+        <td class = "button"><%= link_to "Show",book_path(book) %></td>
+        <td class = "button"><%= link_to "Edit",edit_book_path(book) %></td>
+        <td class = "button"><%= link_to "Destroy", book_path(book), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}%></td>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h1 class = "submit-title">New book</h1>
+<%= form_with model: @book do |form| %>
+ <div><%= form.label :title %>  <%= form.text_field :title %></div>
+ <div><%= form.label :body %>  <%= form.text_area :body %></div>
+ <div><%= form.submit "Create Book", type: :submit %></div>
+ <% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+ <% end %>
+<% end %>　
+</head>
